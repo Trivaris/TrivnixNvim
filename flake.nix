@@ -60,8 +60,9 @@
           src = ./.;
           buildPhase = ''
             mkdir $out/lua -p
-            echo "${user_preferences}" > $out/lua/user_overrides.lua
             cp -r ${finalAttrs.src}/* $out/
+            chmod -R +w $out
+            echo "${user_preferences}" > $out/lua/preferences.lua
           '';
         })) { colorscheme = "habamax"; };
     };
