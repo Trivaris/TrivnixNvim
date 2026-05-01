@@ -49,7 +49,7 @@
         let
           user_preferences = ''
             return {
-                colorscheme = "${colorscheme}",
+                colorscheme = \"${colorscheme}\",
                 use_lsp = false
             }
           '';
