@@ -24,6 +24,10 @@
       '';
     };
 
+    overlays.default = _: prev: {
+      nvim-dotfiles = self.packages.${prev.stdenv.system}.nvim-dotfiles;
+    };
+
     packages.${system} = {
       luarc-config = pkgs.writeText ".luarc.json" (builtins.toJSON {
         diagnostics.globals = [ "vim" ];
