@@ -47,7 +47,7 @@
           ...
         }:
         let
-          user_preferences = pkgs.writeText "user_overrides.lua" ''
+          user_preferences = ''
             return {
                 colorscheme = "${colorscheme}",
                 use_lsp = false
@@ -60,7 +60,7 @@
           src = ./.;
           buildPhase = ''
             mkdir $out/lua -p
-            ln -sf ${user_preferences} $out/lua/user_overrides.lua
+            echo "${user_preferences}" > $out/lua/user_overrides.lua
             cp -r ${finalAttrs.src}/* $out/
           '';
         })) { colorscheme = "habamax"; };
