@@ -39,7 +39,7 @@ NIX_CC='/nix/store/qd70v8g0561vm8m33kmnp79z00cgyi5n-gcc-wrapper-15.2.0'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-NIX_CFLAGS_COMPILE=' -frandom-seed=p530ymcda0 -isystem /nix/store/0ams9cbjhsb1ccphamccr55sqk4ylds4-lua-5.2.4/include -isystem /nix/store/0ams9cbjhsb1ccphamccr55sqk4ylds4-lua-5.2.4/include'
+NIX_CFLAGS_COMPILE=' -frandom-seed=dw7nc6lh48 -isystem /nix/store/0ams9cbjhsb1ccphamccr55sqk4ylds4-lua-5.2.4/include -isystem /nix/store/0ams9cbjhsb1ccphamccr55sqk4ylds4-lua-5.2.4/include'
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
@@ -185,6 +185,7 @@ shell='/nix/store/i27rhb3nr65rkrwz36bchkwmav6ggsmn-bash-5.3p9/bin/bash'
 export shell
 shellHook='rm -rf .luarc.json
 ln -sf /nix/store/shab69bza1226vbkyjbfi23sn9s2l3wq-luarc.json .luarc.json
+trap '\''rm -f .luarc.json'\'' EXIT
 '
 export shellHook
 stdenv='/nix/store/w708nqm6lvvikrq8d3x45g96hzfij0r8-stdenv-linux'
