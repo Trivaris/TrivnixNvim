@@ -29,18 +29,37 @@
         diagnostics.globals = [ "vim" ];
         workspace.library = [ "${pkgs.neovim-unwrapped}/share/nvim/runtime/lua" ];
       });
+
       lazy-nvim-src = pkgs.pkgs.fetchgit {
         url = "https://github.com/folke/lazy.nvim";
         rev = "306a05526ada86a7b30af95c5cc81ffba93fef97";
         hash = "sha256-5A4kducPwKb5fKX4oSUFvo898P0dqfsqqLxFaXBsbQY=";
       };
-      nix-nvim-settings = pkgs.writeText "nix_settings.lua" ''
-        return {
-          colorscheme = "habamax",
-          use_lsp = true,
-          -- You can pass lists, booleans, and complex tables safely here!
-        }
-      '';
+
+      nvim-dotfiles = pkgs.callPackage (
+        {
+          stdenv,
+          colorscheme,
+          ...
+        }:
+        let
+          user_preferences = pkgs.writeText "user_overrides.lua" ''
+            return {
+                colorscheme = "${colorscheme}",
+                use_lsp = false
+            }
+          '';
+        in
+        stdenv.mkDerivation (finalAttrs: {
+          pname = "nvim-dotfiles";
+          version = "1.0.0";
+          src = ./.;
+          buildPhase = ''
+            mkdir $out/lua -p
+            ln -sf ${user_preferences} $out/lua/user_overrides.lua
+            cp -r ${finalAttrs.src}/* $out/
+          '';
+        })) { colorscheme = "habamax"; };
     };
 
   };
